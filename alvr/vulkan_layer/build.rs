@@ -50,6 +50,7 @@ fn main() {
     }
 
     // fail build if there are undefined symbols in final library
+    println!("cargo:rustc-link-lib=supc++");
     println!("cargo:rustc-cdylib-link-arg=-Wl,--no-undefined");
 
     for path in cpp_paths {
