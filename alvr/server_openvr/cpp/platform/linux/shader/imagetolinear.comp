@@ -1,0 +1,28 @@
+#version 450
+#extension GL_EXT_shader_explicit_arithmetic_types : require
+
+struct pixel_data {
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+};
+
+layout (local_size_x = 8, local_size_y = 8, local_size_z = 1) in;
+layout (binding = 0, rgba8) uniform readonly image2D in_img;
+layout (binding = 1) writeonly buffer out_buf {
+    pixel_data data[];
+};
+
+void main() {
+    ivec2 image_size = imageSize(in_img);
+    ivec2 pos = ivec2(gl_GlobalInvocationID.xy);
+    if (pos.x >= image_size.x || pos.y >= image_size.y)
+        return;
+
+    vec4 res = imageLoad(in_img, pos);
+    ivec3 converted = ivec3(res.rgb * 255.0);
+
+    data[pos.x + pos.y * image_size.x].r = uint8_t(converted.r);
+    data[pos.x + pos.y * image_size.x].g = uint8_t(converted.g);
+    data[pos.x + pos.y * image_size.x].b = uint8_t(converted.b);
+}
