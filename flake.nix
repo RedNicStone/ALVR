@@ -20,12 +20,15 @@
             inherit system;
             overlays = overlays;
             config.allowUnfree = true;
+            pkgs = import nixpkgs { inherit system overlays; };
           }));
     in
     {
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {
   nativeBuildInputs = with pkgs;[ 
+    # Only tested in x11
+    # for building streamer
     openssl
     zlib
     pkg-config
@@ -50,13 +53,25 @@
     xorg.libXrandr
     rustPlatform.bindgenHook
     x264
+    # for running streamer
+    xorg.libXcursor
+    xorg.libXi
+    libxkbcommon
+    libGL
     (rust-bin.fromRustupToolchainFile ./rust-toolchain.toml)
       ];
 
  shellHook = ''
   export LIBCLANG_PATH="${pkgs.libclang.lib}/lib"
   export AS=nasm
-'';};      });
+'';
+  LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (with pkgs;[
+            libxkbcommon
+            libGL
+            ]);
+};
+
+});
       overlays.default = final: prev: {};
     };
 }
