@@ -73,3 +73,6 @@ CMakeLists.txt
 cmake-build-debug/
 
 *.jks
+
+#Direnv artifacts, system dependant.
+.direnv/
