@@ -3,6 +3,7 @@
 #include "EncodePipelineNvEnc.h"
 #include "EncodePipelineSW.h"
 #include "EncodePipelineVAAPI.h"
+#include "EncodePipelineRaw.h"
 #include "alvr_server/Logger.h"
 #include "alvr_server/Settings.h"
 #include "ffmpeg_helper.h"
@@ -31,7 +32,7 @@ std::unique_ptr<alvr::EncodePipeline> alvr::EncodePipeline::Create(
 ) {
 	const auto& settings = Settings::Instance();
 	if (settings.m_codec == ALVR_CODEC_RAW)
-		return std::make_unique<alvr::EncodePipelineRaw>(render, width, height);
+		return std::make_unique<alvr::EncodePipelineRaw>(render);
 
     if (settings.m_force_sw_encoding == false) {
         if (vk_ctx.nvidia) {

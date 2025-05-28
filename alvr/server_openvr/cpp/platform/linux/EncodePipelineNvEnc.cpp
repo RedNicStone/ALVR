@@ -21,6 +21,8 @@ const char* encoder(ALVR_CODEC codec) {
         return "hevc_nvenc";
     case ALVR_CODEC_AV1:
         return "av1_nvenc";
+    case ALVR_CODEC_RAW:
+        throw std::runtime_error("Raw is not supported for NVENC encoding");
     }
     throw std::runtime_error("invalid codec " + std::to_string(codec));
 }
@@ -111,6 +113,8 @@ alvr::EncodePipelineNvEnc::EncodePipelineNvEnc(
         break;
     case ALVR_CODEC_AV1:
         break;
+    case ALVR_CODEC_RAW:
+        throw std::runtime_error("Raw is not supported for NVENC encoding");
     }
 
     switch (settings.m_rateControlMode) {

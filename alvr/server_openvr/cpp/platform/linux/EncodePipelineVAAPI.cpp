@@ -24,6 +24,8 @@ const char* encoder(ALVR_CODEC codec) {
         return "hevc_vaapi";
     case ALVR_CODEC_AV1:
         return "av1_vaapi";
+    case ALVR_CODEC_RAW:
+        throw std::runtime_error("Raw is not supported for VAAPI encoding");
     }
     throw std::runtime_error("invalid codec " + std::to_string(codec));
 }
@@ -206,6 +208,8 @@ alvr::EncodePipelineVAAPI::EncodePipelineVAAPI(
     case ALVR_CODEC_AV1:
         encoder_ctx->profile = FF_PROFILE_AV1_MAIN;
         break;
+    case ALVR_CODEC_RAW:
+        throw std::runtime_error("Raw is not supported for VAAPI encoding");
     }
 
     switch (settings.m_rateControlMode) {

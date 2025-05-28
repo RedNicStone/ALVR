@@ -6,7 +6,7 @@ namespace alvr {
 
 class EncodePipelineRaw : public EncodePipeline {
 public:
-    EncodePipelineRaw(Renderer* render, uint32_t width, uint32_t height);
+    EncodePipelineRaw(Renderer* render);
 
     void PushFrame(uint64_t targetTimestampNs, bool idr) override;
     bool GetEncoded(FramePacket& packet) override;

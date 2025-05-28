@@ -4,12 +4,12 @@
 #include "Renderer.h"
 
 
-alvr::EncodePipelineRaw::EncodePipelineRaw(Renderer* render, uint32_t width, uint32_t height) {
+alvr::EncodePipelineRaw::EncodePipelineRaw(Renderer* render) {
     m_renderer = render;
 	m_inputSemaphore = m_renderer->GetOutput().semaphore;
 	m_width = m_renderer->GetOutput().imageInfo.extent.width;
 	m_height = m_renderer->GetOutput().imageInfo.extent.height;
-    m_outputSize = width * height * sizeof(uint8_t) * 3;
+    m_outputSize = m_width * m_height * sizeof(uint8_t) * 3;
 
     // Command buffer
 	VkCommandBufferAllocateInfo commandBufferInfo = {};
