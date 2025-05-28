@@ -60,6 +60,7 @@ pub enum AlvrCodec {
     H264 = 0,
     Hevc = 1,
     AV1 = 2,
+    Raw = 3,
 }
 
 #[repr(u8)]
@@ -377,6 +378,7 @@ pub extern "C" fn alvr_poll_event(out_event: *mut AlvrEvent) -> bool {
                             CodecType::H264 => AlvrCodec::H264,
                             CodecType::Hevc => AlvrCodec::Hevc,
                             CodecType::AV1 => AlvrCodec::AV1,
+                            CodecType::Raw => AlvrCodec::Raw,
                         },
                     }
                 }
@@ -927,6 +929,7 @@ pub extern "C" fn alvr_create_decoder(config: AlvrDecoderConfig) {
             AlvrCodec::H264 => CodecType::H264,
             AlvrCodec::Hevc => CodecType::Hevc,
             AlvrCodec::AV1 => CodecType::AV1,
+            AlvrCodec::Raw => CodecType::Raw,
         },
         force_software_decoder: config.force_software_decoder,
         max_buffering_frames: config.max_buffering_frames,

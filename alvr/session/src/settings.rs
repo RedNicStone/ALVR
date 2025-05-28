@@ -542,6 +542,8 @@ pub enum CodecType {
     Hevc = 1,
     #[schema(strings(display_name = "AV1"))]
     AV1 = 2,
+    #[schema(strings(display_name = "raw"))]
+    Raw = 3,
 }
 
 #[repr(u8)]

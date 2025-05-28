@@ -29,7 +29,11 @@ std::unique_ptr<alvr::EncodePipeline> alvr::EncodePipeline::Create(
     uint32_t width,
     uint32_t height
 ) {
-    if (Settings::Instance().m_force_sw_encoding == false) {
+	const auto& settings = Settings::Instance();
+	if (settings.m_codec == ALVR_CODEC_RAW)
+		return std::make_unique<alvr::EncodePipelineRaw>(render, width, height);
+
+    if (settings.m_force_sw_encoding == false) {
         if (vk_ctx.nvidia) {
             try {
                 auto nvenc = std::make_unique<alvr::EncodePipelineNvEnc>(

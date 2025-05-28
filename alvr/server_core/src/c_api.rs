@@ -65,6 +65,7 @@ pub enum AlvrCodecType {
     H264 = 0,
     Hevc = 1,
     AV1 = 2,
+    Raw = 3,
 }
 
 #[repr(C)]
@@ -473,6 +474,7 @@ pub unsafe extern "C" fn alvr_set_video_config_nals(
         AlvrCodecType::H264 => CodecType::H264,
         AlvrCodecType::Hevc => CodecType::Hevc,
         AlvrCodecType::AV1 => CodecType::AV1,
+        AlvrCodecType::Raw => CodecType::Raw,
     };
 
     let mut config_buffer = vec![0; len as usize];

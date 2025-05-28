@@ -5,10 +5,10 @@
 #include <stdint.h>
 
 enum ALVR_CODEC {
-    ALVR_CODEC_RAW = 0,
-    ALVR_CODEC_H264 = 1,
-    ALVR_CODEC_HEVC = 2,
-    ALVR_CODEC_AV1 = 3,
+    ALVR_CODEC_H264 = 0,
+    ALVR_CODEC_HEVC = 1,
+    ALVR_CODEC_AV1 = 2,
+    ALVR_CODEC_RAW = 3,
 };
 
 enum ALVR_H264_PROFILE {

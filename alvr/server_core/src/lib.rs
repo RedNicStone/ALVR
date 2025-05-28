@@ -119,6 +119,7 @@ pub fn create_recording_file(connection_context: &ConnectionContext, settings: &
         CodecType::H264 => "h264",
         CodecType::Hevc => "h265",
         CodecType::AV1 => "av1",
+        CodecType::Raw => "raw",
     };
 
     let path = FILESYSTEM_LAYOUT.get().unwrap().log_dir.join(format!(
